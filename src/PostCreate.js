@@ -7,6 +7,7 @@ import React, { useState } from "react";
  */
 function PostCreate() {
   const [type, setType] = useState("Text");
+  const [content, setContent] = useState("");
 
   // TODO: When the form is submitted, a new post should be created, and the form contents cleared.
 
@@ -15,14 +16,26 @@ function PostCreate() {
   // - one child `<button>` with a `type="submit"` attribute
   // - one child `<select>` with a `name="type"` attribute
   // - one child `<textarea>` or `<input>` (not both at the same time) with a `name="content"`
+  function handleSubmit(event) {
+    event.preventDefault();
+    console.log("submitted");
+  }
+
+  function handleTypeChange(event) {
+    setType(event.target.value);
+  }
+
+  function handleContentChange(event) {
+    setType(event.target.value);
+  }
 
   return (
-    <form name="create">
+    <form name="create" onSubmit={handleSubmit}>
       <fieldset>
         <legend>Create</legend>
         <div>
           <label htmlFor="type">Type: </label>
-          <select id="type" name="type" required={true}>
+          <select id="type" name="type" required={true} value={type} onChange={handleTypeChange}>
             <option>Text</option>
             <option>Image</option>
           </select>
@@ -30,9 +43,9 @@ function PostCreate() {
         <div>
           <label htmlFor="content">Content: </label>
           {type === "Text" ? (
-            <textarea id="content" name="content" required={true} rows={3} />
+            <textarea id="content" name="content" required={true} rows={3} value={type} onChange={handleContentChange}/>
           ) : (
-            <input id="content" name="content" type="url" required={true} />
+            <input id="content" name="content" type="url" required={true} value={content} onChange={handleTypeChange}/>
           )}
         </div>
         <div>

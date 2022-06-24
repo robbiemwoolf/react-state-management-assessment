@@ -7,12 +7,21 @@ function App() {
   const [posts, setPosts] = useState([]);
 
   // TODO: Add the ability for the <PostCreate /> component to create new posts.
+    // We have a posts array and we want to add something to that array.
+  function createPost(post) {
+    setPosts([ ...posts, post ]);
+  }
+
   // TODO: Add the ability for the <PostList /> component to delete an existing post.
+
+  function deletePost(targetIndex) {
+    setPosts(posts.filter((_, index) => index !== targetIndex));
+  }
 
   return (
     <div className="App">
-      <PostCreate />
-      <PostList />
+      <PostCreate createPosts={createPost} />
+      <PostList posts={posts} deletePost={deletePost}/>
     </div>
   );
 }
